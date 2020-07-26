@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import useWebAnimations, { wobble } from "@wellyshen/use-web-animations";
 
 function App() {
+
+  const { ref, playState, getAnimation } = useWebAnimations({...wobble});
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="target" ref={ref}>
+      </div>
+      <p>Current animation state: {playState}</p>
+      <button onClick={() => getAnimation().pause()}>Pause</button>
+      <button onClick={() => getAnimation().play()}>Play</button>
     </div>
   );
 }
